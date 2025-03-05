@@ -1,0 +1,57 @@
+﻿@page "/todo"
+@rendermode InteractiveAuto
+@inject FilledTodos filledtodo
+
+<PageTitle>Todo</PageTitle>
+<h1>Todo</h1>
+
+
+<ul>
+    @if (todoitems.Count == 0)
+    {
+        <li>Loading.....</li>
+    }
+    @foreach (TodoItem todoItem in todoitems)
+    {
+        <li>
+            @todoItem.Title
+        </li>
+    }
+</ul>
+
+@*Binding the variable with the input box*@
+<input placeholder="Something todo" @bind="todotitle" />
+
+@*Binding the on click method event*@
+<button type="button" class="btn" @onclick="AddTodo">Add todo</button>
+
+@code {
+    private List<TodoItem> todoitems = [];
+
+    // Stores the todo title
+    private string todotitle { get; set; } = "";
+
+    private bool IsLoading = true;
+
+    // Adds the todo
+    private void AddTodo()
+    {
+        if (!string.IsNullOrWhiteSpace(todotitle))
+        {
+            todoitems.Add(new TodoItem()
+                {
+                    IsDone = false,
+                    Title = todotitle
+                });
+            todotitle = "";
+        }
+    }
+
+
+    // Just like the hooks in the Angular like NgOnInit
+    protected override Task OnInitializedAsync()
+    {
+        todoitems = filledtodo.GetFilledTodoItems();
+        return Task.CompletedTask;
+    }
+}

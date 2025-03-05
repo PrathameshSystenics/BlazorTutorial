@@ -1,0 +1,26 @@
+﻿@page "/routercheck/{name}/{id:int}"
+
+
+<div>
+    Name : @Name
+    ID : @Id
+</div>
+
+<SectionContent SectionName="top-bar">
+    <ul>
+        <li>
+            top Bar 1
+        </li>
+        <li>
+            top Bar 2
+        </li>
+    </ul>
+</SectionContent>
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+}

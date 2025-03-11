@@ -1,3 +1,4 @@
+using BlazorTutorial.Client;
 using BlazorTutorial.Client.Pages;
 using BlazorTutorial.Components;
 
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
-
+builder.Services.AddScoped<FilledTodos>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
